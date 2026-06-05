@@ -51,7 +51,7 @@ export function SiteHeader() {
       {menuOpen && (
         <div className="border-t border-[#11263d]/10 bg-[#fffdf8] px-5 pb-5 md:hidden">
           <nav className="mx-auto grid max-w-7xl gap-2 pt-3">
-            {nav.map((item) => <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className="rounded-2xl px-4 py-4 text-lg font-semibold text-[#11263d] hover:bg-[#e8f0ef]">{item.label}</Link>)}
+            {nav.map((item) => <Link key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className="rounded-2xl border border-transparent px-4 py-4 text-lg font-semibold text-[#11263d] hover:border-[#11263d]/20 hover:bg-[#e8f0ef]">{item.label}</Link>)}
           </nav>
         </div>
       )}

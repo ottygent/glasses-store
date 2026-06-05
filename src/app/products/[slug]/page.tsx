@@ -44,6 +44,24 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <ProductOptions product={product} />
           </div>
         </section>
+        <section className="mt-16 grid gap-6 lg:grid-cols-3">
+          <div className="rounded-[2rem] bg-white/80 p-6 stripe-shadow">
+            <p className="text-sm font-semibold uppercase tracking-[.2em] text-[#0b5f59]">Fit notes</p>
+            <h2 className="mt-3 text-2xl font-semibold tracking-[-.03em] text-[#11263d]">Designed for all-day balance.</h2>
+            <p className="mt-3 text-[#334155]">Temple tension, bridge comfort, and lens height are tuned for everyday wear. Choose a narrower, medium, wide, or low-bridge fit before adding to cart.</p>
+          </div>
+          <div className="rounded-[2rem] bg-white/80 p-6 stripe-shadow">
+            <p className="text-sm font-semibold uppercase tracking-[.2em] text-[#7a4f17]">Box contents</p>
+            <h2 className="mt-3 text-2xl font-semibold tracking-[-.03em] text-[#11263d]">Everything included.</h2>
+            <ul className="mt-3 space-y-2 text-[#334155]"><li>• Protective hard case</li><li>• Microfiber cleaning cloth</li><li>• 30-day adjustment window</li></ul>
+          </div>
+          <div className="rounded-[2rem] bg-[#11263d] p-6 text-white stripe-shadow">
+            <p className="text-sm font-semibold uppercase tracking-[.2em] text-[#d7e3e1]">Need help?</p>
+            <h2 className="mt-3 text-2xl font-semibold tracking-[-.03em]">Prescription-ready support.</h2>
+            <p className="mt-3 text-[#e8f0ef]">Upload later, enter values after purchase, or use demo lenses while you validate the ecommerce flow.</p>
+          </div>
+        </section>
+
         <section className="mt-16">
           <h2 className="text-3xl font-semibold tracking-[-.04em]">You may also like</h2>
           <div className="mt-6 grid gap-5 md:grid-cols-3">{related.map((item) => <Link href={`/products/${item.slug}`} key={item.slug} className="rounded-[2rem] bg-white/70 p-4"><FrameArt gradient={item.gradient} /><b className="mt-4 block text-xl">{item.name}</b><span className="text-[#334155]">{formatMoney(item.price)}</span></Link>)}</div>
