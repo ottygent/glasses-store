@@ -72,7 +72,6 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="px-5 py-12 text-center text-sm text-[#334155]">© 2026 LumaLens. Mock storefront demo. Replace sample products/images with Supabase data and real Stripe products.</footer>
     </main>
   );
 }
