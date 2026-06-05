@@ -1,9 +1,10 @@
 import Link from "next/link";
+import { NewsletterForm } from "@/components/newsletter-form";
 
 const shopLinks = [
-  { label: "Shop all frames", href: "/#shop" },
-  { label: "Blue-light glasses", href: "/#shop" },
-  { label: "Prescription ready", href: "/#shop" },
+  { label: "Shop all frames", href: "/#shop-all" },
+  { label: "Blue-light glasses", href: "/#shop-blue-light" },
+  { label: "Prescription ready", href: "/#shop-prescription" },
   { label: "Checkout demo", href: "/checkout" },
 ];
 
@@ -69,13 +70,7 @@ export function SiteFooter() {
             <h2 className="text-2xl font-semibold tracking-[-.03em]">Get frame drops and lens updates.</h2>
             <p className="mt-2 text-sm leading-6 text-[#d7e3e1]">Be first to see new frame drops, fit guides, and seasonal lens offers.</p>
           </div>
-          <form className="grid gap-3 sm:grid-cols-[minmax(16rem,1fr)_auto]" aria-label="Newsletter signup">
-            <label className="sr-only" htmlFor="footer-email">Email address</label>
-            <input id="footer-email" type="email" placeholder="you@example.com" className="min-h-12 rounded-full border border-white/20 bg-white px-5 text-[#11263d] placeholder:text-[#334155]" />
-            <button type="button" className="min-h-12 rounded-full bg-[#e8f0ef] px-6 font-semibold text-[#11263d] transition hover:bg-white">
-              Notify me
-            </button>
-          </form>
+          <NewsletterForm />
         </div>
 
         <div className="mt-10 flex flex-col gap-5 border-t border-white/15 pt-6 text-sm text-[#d7e3e1] md:flex-row md:items-center md:justify-between">

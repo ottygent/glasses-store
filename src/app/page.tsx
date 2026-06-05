@@ -25,6 +25,19 @@ export default function Home() {
     track("PageView", { content_name: "LumaLens storefront" });
   }, []);
 
+  useEffect(() => {
+    function applyShopHash() {
+      const hash = window.location.hash;
+      const next = hash === "#shop-blue-light" ? "Blue-light" : hash === "#shop-prescription" ? "Prescription" : hash === "#shop-all" ? "All" : null;
+      if (!next) return;
+      setCategory(next);
+      window.requestAnimationFrame(() => document.getElementById("shop")?.scrollIntoView({ block: "start" }));
+    }
+    applyShopHash();
+    window.addEventListener("hashchange", applyShopHash);
+    return () => window.removeEventListener("hashchange", applyShopHash);
+  }, []);
+
   function quickAdd(slug: string) {
     const product = products.find((item) => item.slug === slug);
     if (!product) return;
