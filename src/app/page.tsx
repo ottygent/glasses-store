@@ -60,7 +60,24 @@ export default function Home() {
         <div className="reveal-up-delay glass-card stripe-shadow rounded-[2.5rem] p-5"><FrameArt gradient="from-teal-200 via-stone-100 to-amber-100" /><div className="mt-5 grid grid-cols-2 gap-4"><div className="rounded-3xl bg-[#11263d] p-5 text-white"><p className="text-sm text-[#e8f0ef]">New flow</p><b className="text-3xl">Full cart</b><p className="mt-3 text-sm text-[#e8f0ef]">Dedicated cart and checkout pages.</p></div><div className="rounded-3xl bg-white p-5"><p className="text-sm text-[#334155]">Realistic form</p><b className="text-3xl text-[#11263d]">Payment</b><p className="mt-3 text-sm text-[#334155]">Card, PayPal, Apple Pay, billing, shipping.</p></div></div></div>
       </section>
 
-      <section id="trust" className="border-y border-[#11263d]/10 bg-[#11263d] px-5 py-10 text-white"><div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-4"><p>✓ HIPAA-conscious prescription upload placeholder</p><p>✓ Server-side event IDs planned for CAPI dedupe</p><p>✓ Supabase product/order schema ready to wire</p><p>✓ Mobile-first conversion layout</p></div></section>
+      <section id="trust" className="px-5 pb-10">
+        <div className="mx-auto max-w-7xl rounded-[2rem] border border-[#11263d]/10 bg-white/80 p-3 shadow-[0_28px_80px_rgba(17,38,61,0.12)] backdrop-blur-xl">
+          <div className="grid gap-3 md:grid-cols-4">
+            {[
+              ["Fit protected", "30-day comfort guarantee", "↺"],
+              ["Secure checkout", "Card, wallet, and PayPal-ready", "⌁"],
+              ["Lens-ready", "Upload Rx later or use demo lenses", "+"],
+              ["Fast delivery", "Free shipping over $150", "→"],
+            ].map(([title, detail, icon]) => (
+              <div key={title} className="group rounded-[1.5rem] border border-[#11263d]/10 bg-gradient-to-br from-white via-[#fffdf8] to-[#e8f0ef] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#0b5f59]/30 hover:shadow-xl">
+                <div className="mb-5 inline-grid size-11 place-items-center rounded-2xl bg-[#11263d] text-lg font-semibold text-white shadow-lg shadow-slate-900/20 transition duration-300 group-hover:scale-105 group-hover:bg-[#0b5f59]">{icon}</div>
+                <h2 className="text-lg font-semibold tracking-[-.03em] text-[#11263d]">{title}</h2>
+                <p className="mt-2 text-sm leading-6 text-[#334155]">{detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section id="shop" className="lazy-render mx-auto max-w-7xl px-5 py-20"><div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end"><div><p className="text-sm font-semibold uppercase tracking-[.2em] text-[#0b5f59]">Shop the edit</p><h2 className="mt-3 text-4xl font-semibold tracking-[-.04em] md:text-5xl">Frames for every face.</h2></div><p className="max-w-xl text-[#334155]">Open a product page to choose color, lens type, frame fit, and prescription handling.</p></div><div className="mb-8 flex gap-3 overflow-x-auto pb-2 no-scrollbar">{categories.map((item) => <button key={item} onClick={() => setCategory(item)} className={`interactive-lift shrink-0 rounded-full border px-5 py-3 text-sm font-semibold ${category === item ? "border-[#11263d] bg-[#11263d] text-white" : "border-[#11263d]/20 bg-white text-[#11263d] hover:border-[#11263d]"}`}>{item}</button>)}</div><div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{visibleProducts.map((p) => (<article key={p.slug} className="interactive-lift glass-card rounded-[2rem] p-4 transition hover:-translate-y-1 hover:shadow-2xl"><Link href={`/products/${p.slug}`} aria-label={`View ${p.name}`} onClick={() => track("ViewContent", { content_ids: [p.slug] })}><LazyFrameArt gradient={p.gradient} /></Link><div className="p-4"><div className="mb-3 flex flex-wrap gap-2">{p.tags.slice(0,2).map((tag) => <span key={tag} className="rounded-full bg-[#e8f0ef] px-3 py-1 text-xs font-semibold text-[#0b5f59]">{tag}</span>)}</div><h3 className="text-2xl font-semibold tracking-[-.03em]">{p.name}</h3><p className="mt-2 min-h-12 text-sm leading-6 text-[#334155]">{p.description}</p><div className="mt-5 flex items-center justify-between"><div><span className="text-xl font-semibold">{formatMoney(p.price)}</span>{p.compareAt && <span className="ml-2 text-sm text-[#334155] line-through">{formatMoney(p.compareAt)}</span>}<p className="text-xs text-[#334155]">★ {p.rating} ({p.reviews})</p></div><button onClick={() => quickAdd(p.slug)} className="interactive-lift rounded-full bg-[#11263d] px-4 py-3 text-sm font-semibold text-white">Quick add</button></div><Link href={`/products/${p.slug}`} className="mt-4 block text-sm font-semibold text-[#0b5f59]">Choose options →</Link></div></article>))}</div></section>
 
