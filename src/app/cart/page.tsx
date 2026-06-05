@@ -33,8 +33,8 @@ export default function CartPage() {
           <div><p className="text-sm font-semibold uppercase tracking-[.2em] text-[#0b5f59]">Full cart</p><h1 className="mt-3 text-5xl font-semibold tracking-[-.05em]">Review your eyewear order.</h1></div>
           <Link href="/#shop" className="interactive-lift rounded-full border border-[#11263d]/25 bg-white px-6 py-4 text-center font-semibold text-[#11263d] hover:border-[#11263d]">Continue shopping</Link>
         </div>
-        <div className="grid gap-6">
-          <div className="grid max-w-2xl items-start gap-4">
+        <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,42rem)_minmax(19rem,22rem)] xl:justify-center">
+          <div className="grid w-full max-w-2xl items-start gap-4">
             {details.lines.length === 0 ? (
               <div className="rounded-[2rem] bg-white p-10 text-center stripe-shadow"><h2 className="text-2xl font-semibold">Your cart is empty.</h2><p className="mt-3 text-[#334155]">Add a configured pair from a product page or quick-add from the storefront.</p><Link href="/#shop" className="mt-6 inline-block interactive-lift rounded-full bg-[#11263d] px-7 py-4 font-semibold text-white">Shop frames</Link></div>
             ) : details.lines.map((line) => {
@@ -74,7 +74,7 @@ export default function CartPage() {
               );
             })}
           </div>
-          <aside className="h-fit max-w-2xl rounded-[2rem] bg-[#11263d] p-6 text-white stripe-shadow">
+          <aside className="h-fit w-full max-w-2xl rounded-[2rem] bg-[#11263d] p-6 text-white stripe-shadow xl:max-w-none">
             <h2 className="text-2xl font-semibold">Order summary</h2>
             <div className="mt-6 space-y-3 text-sm text-[#e8f0ef]"><div className="flex justify-between"><span>Subtotal</span><b className="text-white">{formatMoney(details.subtotal)}</b></div><div className="flex justify-between"><span>Shipping</span><b className="text-white">{details.shipping === 0 ? "Free" : formatMoney(details.shipping)}</b></div><div className="flex justify-between"><span>Estimated tax</span><b className="text-white">{formatMoney(details.tax)}</b></div><div className="flex justify-between border-t border-white/15 pt-4 text-xl text-white"><span>Total</span><b>{formatMoney(details.total)}</b></div></div>
             <div className="mt-6 rounded-3xl bg-white/10 p-4 text-sm text-[#e8f0ef]"><b className="text-white">Options included:</b><p className="mt-2">Lens selection, frame fit, color, prescription handling, and quantity edits are preserved into checkout.</p></div>
