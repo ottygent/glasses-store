@@ -25,6 +25,7 @@ export function SiteHeader() {
     { href: "/trust", label: "Trust" },
     { href: "/cart", label: "Cart" },
     { href: "/checkout", label: "Payment" },
+    { href: "/admin", label: "Admin" },
   ];
 
   return (
