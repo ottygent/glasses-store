@@ -38,9 +38,9 @@ function statusClass(status: AdminProduct["status"] | string) {
 
 function MetricCard({ label, value, detail, tone = "light" }: { label: string; value: string; detail: string; tone?: "light" | "dark" }) {
   return (
-    <div className={`rounded-[2rem] border p-6 shadow-sm ${tone === "dark" ? "border-[#11263d] bg-[#11263d] text-white" : "border-[#11263d]/10 bg-white/85 text-[#11263d]"}`}>
-      <p className={`text-sm font-semibold uppercase tracking-[.18em] ${tone === "dark" ? "text-[#d7e3e1]" : "text-[#0b5f59]"}`}>{label}</p>
-      <p className="mt-4 text-4xl font-semibold tracking-[-.05em]">{value}</p>
+    <div className={`rounded-[1.75rem] border p-5 shadow-sm sm:rounded-[2rem] sm:p-6 ${tone === "dark" ? "border-[#11263d] bg-[#11263d] text-white" : "border-[#11263d]/10 bg-white/85 text-[#11263d]"}`}>
+      <p className={`text-xs font-semibold uppercase tracking-[.16em] sm:text-sm sm:tracking-[.18em] ${tone === "dark" ? "text-[#d7e3e1]" : "text-[#0b5f59]"}`}>{label}</p>
+      <p className="mt-4 text-3xl font-semibold tracking-[-.05em] sm:text-4xl">{value}</p>
       <p className={`mt-3 text-sm leading-6 ${tone === "dark" ? "text-[#e8f0ef]" : "text-[#334155]"}`}>{detail}</p>
     </div>
   );
@@ -119,13 +119,13 @@ function LoginPanel({ onLogin }: { onLogin: () => void }) {
   return (
     <main className="min-h-screen bg-[#f7f4ee] text-[#11263d]">
       <SiteHeader />
-      <section className="mx-auto grid min-h-screen max-w-7xl items-center gap-8 px-5 py-32 lg:grid-cols-[1fr_460px]">
+      <section className="mx-auto grid min-h-screen max-w-7xl items-center gap-8 px-4 py-24 sm:px-5 sm:py-28 lg:grid-cols-[1fr_460px]">
         <div>
-          <p className="inline-flex rounded-full border border-[#0b5f59]/20 bg-white px-4 py-2 text-sm font-semibold text-[#0b5f59]">Cookie authentication • demo admin</p>
-          <h1 className="mt-6 max-w-3xl text-5xl font-semibold leading-none tracking-[-.06em] md:text-7xl">Admin sign in for the LumaLens back office.</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[#334155]">This static GitHub Pages demo uses a browser cookie for the admin session and localStorage for inserted catalog records. Production would replace this with server-side auth and a database.</p>
+          <p className="inline-flex rounded-full border border-[#0b5f59]/20 bg-white px-3 py-2 text-xs font-semibold text-[#0b5f59] sm:px-4 sm:text-sm">Cookie authentication • demo admin</p>
+          <h1 className="mt-5 max-w-3xl text-4xl font-semibold leading-[.95] tracking-[-.06em] sm:mt-6 sm:text-5xl md:text-7xl">Admin sign in for the LumaLens back office.</h1>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-[#334155] sm:mt-6 sm:text-lg sm:leading-8">This static GitHub Pages demo uses a browser cookie for the admin session and localStorage for inserted catalog records. Production would replace this with server-side auth and a database.</p>
         </div>
-        <form onSubmit={submit} className="rounded-[2.5rem] border border-[#11263d]/10 bg-white p-6 shadow-2xl shadow-slate-900/10 md:p-8">
+        <form onSubmit={submit} className="rounded-[1.75rem] border border-[#11263d]/10 bg-white p-5 shadow-2xl shadow-slate-900/10 sm:rounded-[2.5rem] sm:p-6 md:p-8">
           <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#7a4f17]">Admin sign in</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-[-.04em]">Access dashboard</h2>
           <label className="mt-6 grid gap-2 text-sm font-semibold">Email<input value={email} onChange={(event) => setEmail(event.target.value)} className="rounded-2xl border border-[#11263d]/15 px-4 py-3 font-normal outline-none focus:border-[#0b5f59]" /></label>
@@ -250,18 +250,18 @@ export default function AdminPage() {
   return (
     <main className="min-h-screen bg-[#f7f4ee] text-[#11263d]">
       <SiteHeader />
-      <section className="mx-auto max-w-7xl px-5 pb-10 pt-32">
-        <div className="rounded-[2.5rem] bg-[#11263d] p-6 text-white shadow-2xl shadow-slate-900/20 md:p-10">
-          <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+      <section className="mx-auto max-w-7xl px-4 pb-8 pt-24 sm:px-5 sm:pb-10 sm:pt-32">
+        <div className="rounded-[1.75rem] bg-[#11263d] p-5 text-white shadow-2xl shadow-slate-900/20 sm:rounded-[2.5rem] sm:p-6 md:p-10">
+          <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <div>
-              <p className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-[#d7e3e1]">Cookie-authenticated admin • localStorage catalog</p>
-              <h1 className="mt-6 max-w-4xl text-5xl font-semibold leading-none tracking-[-.06em] md:text-7xl">Commerce command center for LumaLens.</h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#d7e3e1]">A polished admin experience with dashboard metrics, orders, customers, inventory controls, cookie authentication, and persistent local product insertion.</p>
+              <p className="inline-flex max-w-full rounded-full border border-white/15 bg-white/10 px-3 py-2 text-xs font-semibold text-[#d7e3e1] sm:px-4 sm:text-sm">Cookie-authenticated admin • localStorage catalog</p>
+              <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-[.95] tracking-[-.06em] sm:mt-6 sm:text-5xl md:text-7xl">Commerce command center for LumaLens.</h1>
+              <p className="mt-5 max-w-2xl text-base leading-7 text-[#d7e3e1] sm:mt-6 sm:text-lg sm:leading-8">A polished admin experience with dashboard metrics, orders, customers, inventory controls, cookie authentication, and persistent local product insertion.</p>
             </div>
-            <div className="rounded-[2rem] border border-white/15 bg-white/10 p-5 backdrop-blur">
+            <div className="rounded-[1.5rem] border border-white/15 bg-white/10 p-4 backdrop-blur sm:rounded-[2rem] sm:p-5">
               <p className="text-sm text-[#d7e3e1]">Workspace status</p>
-              <p className="mt-2 text-2xl font-semibold">{savedAt}</p>
-              <div className="mt-5 flex flex-wrap gap-3">
+              <p className="mt-2 text-xl font-semibold leading-tight sm:text-2xl">{savedAt}</p>
+              <div className="mt-5 grid gap-3 sm:flex sm:flex-wrap">
                 <button onClick={publishDraft} className="interactive-lift rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#11263d]">Save demo</button>
                 <button onClick={duplicateProduct} className="interactive-lift rounded-full border border-white/25 px-5 py-3 text-sm font-semibold text-white">Duplicate</button>
                 <button onClick={logout} className="interactive-lift rounded-full border border-white/25 px-5 py-3 text-sm font-semibold text-white">Sign out</button>
@@ -270,17 +270,17 @@ export default function AdminPage() {
           </div>
         </div>
 
-        <div className="mt-6 flex flex-wrap gap-3 rounded-full border border-[#11263d]/10 bg-white/70 p-2 shadow-sm backdrop-blur">
+        <div className="mt-5 grid grid-cols-2 gap-2 rounded-[1.5rem] border border-[#11263d]/10 bg-white/70 p-2 shadow-sm backdrop-blur sm:mt-6 sm:flex sm:flex-wrap sm:gap-3 sm:rounded-full">
           {tabs.map((tab) => (
-            <button key={tab} onClick={() => setActiveTab(tab)} className={`rounded-full px-5 py-3 text-sm font-semibold transition ${activeTab === tab ? "bg-[#11263d] text-white shadow-lg shadow-slate-900/15" : "text-[#334155] hover:bg-[#e8f0ef] hover:text-[#11263d]"}`}>{tab}</button>
+            <button key={tab} onClick={() => setActiveTab(tab)} className={`rounded-full px-4 py-3 text-sm font-semibold transition sm:px-5 ${activeTab === tab ? "bg-[#11263d] text-white shadow-lg shadow-slate-900/15" : "text-[#334155] hover:bg-[#e8f0ef] hover:text-[#11263d]"}`}>{tab}</button>
           ))}
-          <Link href="/" className="ml-auto rounded-full px-5 py-3 text-sm font-semibold text-[#334155] hover:bg-[#e8f0ef]">View storefront →</Link>
+          <Link href="/" className="col-span-2 rounded-full px-4 py-3 text-center text-sm font-semibold text-[#334155] hover:bg-[#e8f0ef] sm:col-span-1 sm:ml-auto sm:px-5">View storefront →</Link>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 pb-20">
+      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-5 sm:pb-20">
         <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
-          <aside className="space-y-5">
+          <aside className="hidden space-y-5 lg:block">
             <div className="rounded-[2rem] border border-[#11263d]/10 bg-white p-5 shadow-sm">
               <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#0b5f59]">Admin modules</p>
               <div className="mt-5 grid gap-2">
@@ -305,9 +305,9 @@ export default function AdminPage() {
                   <MetricCard label="Low stock" value={`${totals.lowStock}`} detail="Products at or below reorder point." />
                 </div>
                 <div className="grid gap-6 xl:grid-cols-[1.1fr_.9fr]">
-                  <div className="rounded-[2rem] border border-[#11263d]/10 bg-white p-6 shadow-sm">
-                    <div className="flex items-center justify-between gap-4">
-                      <div><p className="text-sm font-semibold uppercase tracking-[.18em] text-[#0b5f59]">Sales health</p><h2 className="mt-2 text-3xl font-semibold tracking-[-.04em]">Collection performance</h2></div>
+                  <div className="rounded-[1.75rem] border border-[#11263d]/10 bg-white p-5 shadow-sm sm:rounded-[2rem] sm:p-6">
+                    <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+                      <div><p className="text-sm font-semibold uppercase tracking-[.18em] text-[#0b5f59]">Sales health</p><h2 className="mt-2 text-2xl font-semibold tracking-[-.04em] sm:text-3xl">Collection performance</h2></div>
                       <button onClick={() => setActiveTab("Products")} className="rounded-full bg-[#11263d] px-5 py-3 text-sm font-semibold text-white">Manage products</button>
                     </div>
                     <div className="mt-6 space-y-4">
@@ -320,7 +320,7 @@ export default function AdminPage() {
                       ))}
                     </div>
                   </div>
-                  <div className="rounded-[2rem] border border-[#11263d]/10 bg-white p-6 shadow-sm">
+                  <div className="rounded-[1.75rem] border border-[#11263d]/10 bg-white p-5 shadow-sm sm:rounded-[2rem] sm:p-6">
                     <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#7a4f17]">Recent orders</p>
                     <div className="mt-5 space-y-3">
                       {adminOrders.map((order) => <div key={order.id} className="rounded-2xl bg-[#f7f4ee] p-4"><div className="flex items-center justify-between gap-3"><b>{order.id}</b><span className={`rounded-full border px-3 py-1 text-xs font-semibold ${statusClass(order.status)}`}>{order.status}</span></div><p className="mt-2 text-sm text-[#334155]">{order.customer} • {order.product}</p><p className="mt-2 font-semibold">{formatMoney(order.total)} <span className="text-sm font-normal text-[#334155]">{order.date}</span></p></div>)}
@@ -333,10 +333,10 @@ export default function AdminPage() {
             {activeTab === "Products" && (
               <div className="grid gap-6 xl:grid-cols-[1.15fr_.85fr]">
                 <div className="space-y-6">
-                  <form onSubmit={createProduct} className="rounded-[2rem] border border-[#11263d]/10 bg-white p-6 shadow-sm">
+                  <form onSubmit={createProduct} className="rounded-[1.75rem] border border-[#11263d]/10 bg-white p-5 shadow-sm sm:rounded-[2rem] sm:p-6">
                     <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
-                      <div><p className="text-sm font-semibold uppercase tracking-[.18em] text-[#0b5f59]">Real data insertion</p><h2 className="mt-2 text-3xl font-semibold tracking-[-.04em]">Create product</h2></div>
-                      <button type="submit" className="interactive-lift rounded-full bg-[#0b5f59] px-6 py-3 text-sm font-semibold text-white">Insert product</button>
+                      <div><p className="text-sm font-semibold uppercase tracking-[.18em] text-[#0b5f59]">Real data insertion</p><h2 className="mt-2 text-2xl font-semibold tracking-[-.04em] sm:text-3xl">Create product</h2></div>
+                      <button type="submit" className="interactive-lift w-full rounded-full bg-[#0b5f59] px-6 py-3 text-sm font-semibold text-white sm:w-auto">Insert product</button>
                     </div>
                     <div className="mt-6 grid gap-4 md:grid-cols-2">
                       <label className="grid gap-2 text-sm font-semibold">Product name<input value={newProduct.name} onChange={(event) => setNewProduct((current) => ({ ...current, name: event.target.value }))} placeholder="Riviera Blue" className="rounded-2xl border border-[#11263d]/15 px-4 py-3 font-normal outline-none focus:border-[#0b5f59]" /></label>
@@ -348,9 +348,9 @@ export default function AdminPage() {
                     </div>
                   </form>
 
-                  <div className="rounded-[2rem] border border-[#11263d]/10 bg-white p-6 shadow-sm">
+                  <div className="rounded-[1.75rem] border border-[#11263d]/10 bg-white p-5 shadow-sm sm:rounded-[2rem] sm:p-6">
                     <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
-                      <div><p className="text-sm font-semibold uppercase tracking-[.18em] text-[#0b5f59]">Catalog manager</p><h2 className="mt-2 text-3xl font-semibold tracking-[-.04em]">Products and inventory</h2></div>
+                      <div><p className="text-sm font-semibold uppercase tracking-[.18em] text-[#0b5f59]">Catalog manager</p><h2 className="mt-2 text-2xl font-semibold tracking-[-.04em] sm:text-3xl">Products and inventory</h2></div>
                       <div className="flex flex-col gap-3 sm:flex-row"><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search products" className="rounded-full border border-[#11263d]/15 bg-[#fffdf8] px-5 py-3 text-sm outline-none focus:border-[#0b5f59]" /><button onClick={resetDemoData} className="rounded-full border border-[#11263d]/20 px-5 py-3 text-sm font-semibold text-[#11263d]">Reset data</button></div>
                     </div>
                     <div className="mt-6 overflow-hidden rounded-[1.5rem] border border-[#11263d]/10">
@@ -367,9 +367,9 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                <div className="rounded-[2rem] border border-[#11263d]/10 bg-white p-6 shadow-sm">
+                <div className="rounded-[1.75rem] border border-[#11263d]/10 bg-white p-5 shadow-sm sm:rounded-[2rem] sm:p-6">
                   <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#7a4f17]">Product editor</p>
-                  <h2 className="mt-2 text-3xl font-semibold tracking-[-.04em]">{selectedProduct.name}</h2>
+                  <h2 className="mt-2 text-2xl font-semibold tracking-[-.04em] sm:text-3xl">{selectedProduct.name}</h2>
                   <p className="mt-2 text-sm leading-6 text-[#334155]">Edit fields locally, save to localStorage, then reload the admin panel to see inserted data persist.</p>
                   <div className="mt-6 grid gap-4">
                     <label className="grid gap-2 text-sm font-semibold">Name<input value={selectedProduct.name} onChange={(event) => updateSelected("name", event.target.value)} className="rounded-2xl border border-[#11263d]/15 px-4 py-3 font-normal outline-none focus:border-[#0b5f59]" /></label>
@@ -389,8 +389,8 @@ export default function AdminPage() {
             )}
 
             {activeTab === "Orders" && (
-              <div className="rounded-[2rem] border border-[#11263d]/10 bg-white p-6 shadow-sm">
-                <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#0b5f59]">Order operations</p><h2 className="mt-2 text-3xl font-semibold tracking-[-.04em]">Fulfillment queue</h2>
+              <div className="rounded-[1.75rem] border border-[#11263d]/10 bg-white p-5 shadow-sm sm:rounded-[2rem] sm:p-6">
+                <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#0b5f59]">Order operations</p><h2 className="mt-2 text-2xl font-semibold tracking-[-.04em] sm:text-3xl">Fulfillment queue</h2>
                 <div className="mt-6 grid gap-3">
                   {adminOrders.map((order) => <div key={order.id} className="grid gap-3 rounded-3xl border border-[#11263d]/10 p-5 md:grid-cols-[120px_1fr_140px_120px] md:items-center"><b>{order.id}</b><div><p className="font-semibold">{order.customer}</p><p className="text-sm text-[#334155]">{order.product} • {order.date}</p></div><span className={`w-fit rounded-full border px-3 py-1 text-xs font-semibold ${statusClass(order.status)}`}>{order.status}</span><b>{formatMoney(order.total)}</b></div>)}
                 </div>
@@ -398,8 +398,8 @@ export default function AdminPage() {
             )}
 
             {activeTab === "Customers" && (
-              <div className="rounded-[2rem] border border-[#11263d]/10 bg-white p-6 shadow-sm">
-                <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#0b5f59]">Customer CRM</p><h2 className="mt-2 text-3xl font-semibold tracking-[-.04em]">Segments and lifetime value</h2>
+              <div className="rounded-[1.75rem] border border-[#11263d]/10 bg-white p-5 shadow-sm sm:rounded-[2rem] sm:p-6">
+                <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#0b5f59]">Customer CRM</p><h2 className="mt-2 text-2xl font-semibold tracking-[-.04em] sm:text-3xl">Segments and lifetime value</h2>
                 <div className="mt-6 grid gap-4 md:grid-cols-3">
                   {adminCustomers.map((customer) => <div key={customer.email} className="rounded-3xl border border-[#11263d]/10 bg-[#fffdf8] p-5"><div className="grid size-12 place-items-center rounded-2xl bg-[#11263d] font-semibold text-white">{customer.name.split(" ").map((part) => part[0]).join("")}</div><h3 className="mt-4 text-xl font-semibold">{customer.name}</h3><p className="mt-1 text-sm text-[#334155]">{customer.email}</p><p className="mt-4 rounded-full bg-[#e8f0ef] px-3 py-2 text-sm font-semibold text-[#0b5f59]">{customer.segment}</p><p className="mt-4 text-2xl font-semibold">{formatMoney(customer.spend)}</p></div>)}
                 </div>

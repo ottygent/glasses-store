@@ -30,24 +30,24 @@ export function SiteHeader() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-[#11263d]/15 bg-[#fffdf8]/95 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-        <div className="flex items-center gap-3">
-          <button aria-label="Toggle navigation menu" aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)} className="grid size-12 place-items-center rounded-full border border-[#11263d]/20 bg-white text-[#11263d] shadow-sm md:hidden">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-5 sm:py-4">
+        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+          <button aria-label="Toggle navigation menu" aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)} className="grid size-11 shrink-0 place-items-center rounded-full border border-[#11263d]/20 bg-white text-[#11263d] shadow-sm md:hidden">
             <span className="space-y-1.5">
               <span className={`block h-0.5 w-5 rounded bg-[#11263d] transition ${menuOpen ? "translate-y-2 rotate-45" : ""}`} />
               <span className={`block h-0.5 w-5 rounded bg-[#11263d] transition ${menuOpen ? "opacity-0" : ""}`} />
               <span className={`block h-0.5 w-5 rounded bg-[#11263d] transition ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`} />
             </span>
           </button>
-          <Link href="/" className="flex items-center gap-3 font-semibold tracking-tight text-[#11263d]" onClick={() => setMenuOpen(false)}>
-            <span className="grid size-10 place-items-center rounded-2xl bg-[#11263d] text-white">LL</span>
-            LumaLens
+          <Link href="/" className="flex min-w-0 items-center gap-2 font-semibold tracking-tight text-[#11263d] sm:gap-3" onClick={() => setMenuOpen(false)}>
+            <span className="grid size-10 shrink-0 place-items-center rounded-2xl bg-[#11263d] text-white">LL</span>
+            <span className="truncate">LumaLens</span>
           </Link>
         </div>
         <nav className="hidden items-center gap-8 text-sm font-medium text-[#334155] md:flex">
           {nav.map((item) => <Link key={item.href} href={item.href} className="hover:text-[#11263d]">{item.label}</Link>)}
         </nav>
-        <Link href="/cart" className="rounded-full bg-[#11263d] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/20">Cart ({count})</Link>
+        <Link href="/cart" className="shrink-0 rounded-full bg-[#11263d] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 sm:px-5">Cart ({count})</Link>
       </div>
       {menuOpen && (
         <div className="border-t border-[#11263d]/10 bg-[#fffdf8] px-5 pb-5 md:hidden">
