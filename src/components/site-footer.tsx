@@ -19,7 +19,8 @@ const companyLinks = [
   { label: "Our promise", href: "/trust" },
   { label: "Try-on flow", href: "/try-on" },
   { label: "Storefront features", href: "/features" },
-  { label: "Developer notes", href: "/features" },
+  { label: "Writes", href: "/writes" },
+  { label: "Blog", href: "/blog" },
 ];
 
 function FooterColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
