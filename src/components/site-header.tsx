@@ -23,8 +23,6 @@ export function SiteHeader() {
     { href: "/shop", label: "Shop" },
     { href: "/try-on", label: "Try-on" },
     { href: "/trust", label: "Trust" },
-    { href: "/writes", label: "Writes" },
-    { href: "/blog", label: "Blog" },
     { href: "/cart", label: "Cart" },
     { href: "/checkout", label: "Payment" },
     { href: "/admin", label: "Admin" },
@@ -46,7 +44,7 @@ export function SiteHeader() {
             <span className="truncate">LumaLens</span>
           </Link>
         </div>
-        <nav className="hidden items-center gap-5 text-sm font-medium text-[#334155] lg:gap-8 md:flex">
+        <nav className="hidden items-center gap-8 text-sm font-medium text-[#334155] md:flex">
           {nav.map((item) => <Link key={item.href} href={item.href} className="hover:text-[#11263d]">{item.label}</Link>)}
         </nav>
         <Link href="/cart" className="shrink-0 rounded-full bg-[#11263d] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 sm:px-5">Cart ({count})</Link>
