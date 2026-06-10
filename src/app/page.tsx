@@ -86,22 +86,22 @@ export default function Home() {
 
       <section id="tryon" className="lazy-render mx-auto grid max-w-7xl gap-8 px-5 py-16 lg:grid-cols-2"><div className="rounded-[2rem] bg-[#fffdf8] p-8 stripe-shadow"><p className="text-sm font-semibold uppercase tracking-[.2em] text-[#7a4f17]">Modern ecommerce features</p><h2 className="mt-3 text-4xl font-semibold tracking-[-.04em]">Built like a real storefront, without requiring admin.</h2><ul className="mt-6 space-y-4 text-[#334155]"><li>• Hamburger menu navigation across storefront, cart, and checkout.</li><li>• Product detail pages with configurable frame and lens options.</li><li>• Full cart page with shipping, tax, line editing, and order summary.</li><li>• Real-looking payment page with multiple payment methods.</li></ul></div><div id="checkout" className="rounded-[2rem] bg-[#11263d] p-8 text-white"><p className="text-sm text-[#d7e3e1]">Checkout preview</p><h3 className="mt-2 text-3xl font-semibold">Choose a payment method</h3><div className="mt-6 grid gap-3"><Link href="/checkout" className="rounded-2xl bg-white p-5 font-semibold text-[#11263d]">Credit / debit card →</Link><Link href="/checkout" className="rounded-2xl border border-[#e8f0ef] bg-[#e8f0ef] p-5 font-semibold text-[#11263d]">Apple Pay / PayPal →</Link></div></div></section>
 
-      <section className="lazy-render mx-auto max-w-7xl px-5 py-16">
-        <div className="grid gap-6 lg:grid-cols-3">
-          <div className="rounded-[2rem] bg-white p-7 stripe-shadow">
-            <p className="text-sm font-semibold uppercase tracking-[.2em] text-[#0b5f59]">Lens lab</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-[-.04em] text-[#11263d]">Every frame can be finished for how you actually use it.</h2>
-            <p className="mt-4 text-[#334155]">Choose demo clear, blue-light, single vision, or progressive lenses on the product page. Pricing updates before you add to cart.</p>
+      <section className="lazy-render mx-auto max-w-7xl px-5 py-28">
+        <div className="grid gap-10 lg:grid-cols-3">
+          <div className="min-h-[21rem] rounded-[2rem] bg-white px-8 py-12 stripe-shadow">
+            <p className="text-xs font-semibold uppercase tracking-[.24em] text-[#0b5f59]">Lens lab</p>
+            <h2 className="mt-6 text-2xl font-semibold leading-tight tracking-[-.04em] text-[#11263d]">Every frame can be finished for how you actually use it.</h2>
+            <p className="mt-7 text-sm leading-7 text-[#334155]">Choose demo clear, blue-light, single vision, or progressive lenses on the product page. Pricing updates before you add to cart.</p>
           </div>
-          <div className="rounded-[2rem] bg-[#11263d] p-7 text-white stripe-shadow">
-            <p className="text-sm font-semibold uppercase tracking-[.2em] text-[#d7e3e1]">Fit promise</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-[-.04em]">30-day comfort check.</h2>
-            <p className="mt-4 text-[#e8f0ef]">The full cart preserves fit, color, and prescription choices so the checkout summary is easy to review before payment.</p>
+          <div className="min-h-[21rem] rounded-[2rem] bg-[#11263d] px-8 py-12 text-white stripe-shadow">
+            <p className="text-xs font-semibold uppercase tracking-[.24em] text-[#d7e3e1]">Fit promise</p>
+            <h2 className="mt-6 text-2xl font-semibold leading-tight tracking-[-.04em]">30-day comfort check.</h2>
+            <p className="mt-7 text-sm leading-7 text-[#e8f0ef]">The full cart preserves fit, color, and prescription choices so the checkout summary is easy to review before payment.</p>
           </div>
-          <div className="rounded-[2rem] bg-white p-7 stripe-shadow">
-            <p className="text-sm font-semibold uppercase tracking-[.2em] text-[#7a4f17]">Secure flow</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-[-.04em] text-[#11263d]">Buttons and forms are built for clarity.</h2>
-            <p className="mt-4 text-[#334155]">Primary, secondary, wallet, and disabled payment actions now use explicit high-contrast colors instead of low-opacity text.</p>
+          <div className="min-h-[21rem] rounded-[2rem] bg-white px-8 py-12 stripe-shadow">
+            <p className="text-xs font-semibold uppercase tracking-[.24em] text-[#7a4f17]">Secure flow</p>
+            <h2 className="mt-6 text-2xl font-semibold leading-tight tracking-[-.04em] text-[#11263d]">Buttons and forms are built for clarity.</h2>
+            <p className="mt-7 text-sm leading-7 text-[#334155]">Primary, secondary, wallet, and disabled payment actions now use explicit high-contrast colors instead of low-opacity text.</p>
           </div>
         </div>
       </section>
