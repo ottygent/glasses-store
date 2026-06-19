@@ -106,6 +106,36 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="location" className="lazy-render mx-auto max-w-7xl px-5 pb-28">
+        <div className="grid overflow-hidden rounded-[2.5rem] border border-[#11263d]/10 bg-[#fffdf8] shadow-[0_28px_80px_rgba(17,38,61,0.12)] lg:grid-cols-[.9fr_1.1fr]">
+          <div className="p-8 sm:p-10 lg:p-12">
+            <p className="text-sm font-semibold uppercase tracking-[.22em] text-[#0b5f59]">Visit our studio</p>
+            <h2 className="mt-5 text-4xl font-semibold tracking-[-.05em] text-[#11263d] md:text-5xl">Find LumaLens on Google Maps.</h2>
+            <p className="mt-6 text-lg leading-8 text-[#334155]">Stop by the demo showroom for fit checks, lens guidance, and frame styling support.</p>
+            <div className="mt-8 rounded-[1.5rem] bg-white p-5 text-[#11263d] shadow-sm">
+              <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#7a4f17]">Location</p>
+              <address className="mt-3 not-italic leading-7 text-[#334155]">
+                LumaLens Studio<br />
+                126 Greene Street<br />
+                New York, NY 10012
+              </address>
+              <p className="mt-4 text-sm font-semibold text-[#0b5f59]">Open Mon–Sat · 10:00 AM–7:00 PM</p>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=126%20Greene%20Street%2C%20New%20York%2C%20NY%2010012" target="_blank" rel="noreferrer" className="interactive-lift mt-8 inline-flex rounded-full bg-[#11263d] px-7 py-4 font-semibold text-white shadow-xl shadow-slate-900/15">Open in Google Maps</a>
+          </div>
+          <div className="min-h-[24rem] bg-[#e8f0ef] lg:min-h-[34rem]">
+            <iframe
+              title="Google Maps location for LumaLens Studio"
+              src="https://www.google.com/maps?q=126%20Greene%20Street%2C%20New%20York%2C%20NY%2010012&output=embed"
+              className="h-full min-h-[24rem] w-full border-0 lg:min-h-[34rem]"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </section>
+
     </main>
   );
 }

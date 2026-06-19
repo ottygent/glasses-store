@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { adminCustomers, adminInsights, adminOrders, adminProducts, adminTotals, type AdminCustomer, type AdminOrder, type AdminProduct } from "@/lib/admin";
@@ -50,23 +49,6 @@ function MetricCard({ label, value, detail, tone = "light" }: { label: string; v
       <p className="mt-4 text-3xl font-semibold tracking-[-.05em] sm:text-4xl">{value}</p>
       <p className={`mt-3 text-sm leading-6 ${tone === "dark" ? "text-[#e8f0ef]" : "text-[#334155]"}`}>{detail}</p>
     </div>
-  );
-}
-
-function AdminNavbar({ activeTab, onTabChange, onLogout }: { activeTab: AdminTab; onTabChange: (tab: AdminTab) => void; onLogout: () => void }) {
-  return (
-    <nav className="sticky top-[73px] z-40 mt-5 rounded-[1.5rem] border border-[#11263d]/10 bg-[#fffdf8]/95 p-2 shadow-xl shadow-slate-900/10 backdrop-blur sm:mt-6 sm:rounded-full" aria-label="Admin dashboard navigation">
-      <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center sm:gap-3">
-        {adminNav.map((item) => (
-          <button key={item.tab} onClick={() => onTabChange(item.tab)} className={`rounded-full px-4 py-3 text-left text-sm font-semibold transition sm:px-5 ${activeTab === item.tab ? "bg-[#11263d] text-white shadow-lg shadow-slate-900/15" : "text-[#334155] hover:bg-[#e8f0ef] hover:text-[#11263d]"}`}>
-            <span className="block leading-none">{item.label}</span>
-            <span className={`mt-1 block text-[0.68rem] font-semibold uppercase tracking-[.14em] ${activeTab === item.tab ? "text-[#d7e3e1]" : "text-[#6b7280]"}`}>{item.detail}</span>
-          </button>
-        ))}
-        <Link href="/" className="rounded-full px-4 py-3 text-center text-sm font-semibold text-[#334155] hover:bg-[#e8f0ef] sm:ml-auto sm:px-5">Storefront</Link>
-        <button onClick={onLogout} className="rounded-full border border-[#11263d]/15 px-4 py-3 text-sm font-semibold text-[#11263d] hover:border-[#11263d] sm:px-5">Sign out</button>
-      </div>
-    </nav>
   );
 }
 
@@ -313,8 +295,6 @@ export default function AdminPage() {
             </div>
           </div>
         </div>
-
-        <AdminNavbar activeTab={activeTab} onTabChange={setActiveTab} onLogout={logout} />
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-5 sm:pb-20">
