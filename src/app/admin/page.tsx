@@ -276,21 +276,21 @@ export default function AdminPage() {
   return (
     <main className="min-h-screen bg-[#f7f4ee] text-[#11263d]">
       <SiteHeader />
-      <section className="mx-auto max-w-7xl px-4 pb-8 pt-24 sm:px-5 sm:pb-10 sm:pt-32">
-        <div className="rounded-[1.75rem] bg-[#11263d] p-5 text-white shadow-2xl shadow-slate-900/20 sm:rounded-[2.5rem] sm:p-6 md:p-10">
-          <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+      <section className="mx-auto max-w-7xl px-4 pb-6 pt-24 sm:px-5 sm:pt-28">
+        <div className="rounded-[1.75rem] bg-[#11263d] p-5 text-white shadow-2xl shadow-slate-900/20 sm:rounded-[2rem] sm:p-6 md:p-8">
+          <div className="grid gap-6 lg:grid-cols-[1fr_320px] lg:items-end">
             <div>
               <p className="inline-flex max-w-full rounded-full border border-white/15 bg-white/10 px-3 py-2 text-xs font-semibold text-[#d7e3e1] sm:px-4 sm:text-sm">Cookie-authenticated admin • localStorage catalog</p>
-              <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-[.95] tracking-[-.06em] sm:mt-6 sm:text-5xl md:text-7xl">Commerce command center for LumaLens.</h1>
-              <p className="mt-5 max-w-2xl text-base leading-7 text-[#d7e3e1] sm:mt-6 sm:text-lg sm:leading-8">A polished admin experience with dashboard metrics, orders, customers, inventory controls, cookie authentication, and persistent local product insertion.</p>
+              <h1 className="mt-5 max-w-3xl text-4xl font-semibold leading-[.98] tracking-[-.05em] sm:text-5xl md:text-6xl">Commerce command center.</h1>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-[#d7e3e1] sm:text-lg">Manage products, orders, customers, inventory, and demo workspace state from one cleaner dashboard.</p>
             </div>
-            <div className="rounded-[1.5rem] border border-white/15 bg-white/10 p-4 backdrop-blur sm:rounded-[2rem] sm:p-5">
+            <div className="rounded-[1.5rem] border border-white/15 bg-white/10 p-4 backdrop-blur sm:rounded-[1.75rem] sm:p-5">
               <p className="text-sm text-[#d7e3e1]">Workspace status</p>
               <p className="mt-2 text-xl font-semibold leading-tight sm:text-2xl">{savedAt}</p>
-              <div className="mt-5 grid gap-3 sm:flex sm:flex-wrap">
+              <div className="mt-5 grid grid-cols-2 gap-3">
                 <button onClick={publishDraft} className="interactive-lift rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#11263d]">Save demo</button>
                 <button onClick={duplicateProduct} className="interactive-lift rounded-full border border-white/25 px-5 py-3 text-sm font-semibold text-white">Duplicate</button>
-                <button onClick={logout} className="interactive-lift rounded-full border border-white/25 px-5 py-3 text-sm font-semibold text-white">Sign out</button>
+                <button onClick={logout} className="interactive-lift col-span-2 rounded-full border border-white/25 px-5 py-3 text-sm font-semibold text-white">Sign out</button>
               </div>
             </div>
           </div>
@@ -298,23 +298,28 @@ export default function AdminPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-5 sm:pb-20">
-        <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
-          <aside className="hidden space-y-5 lg:block">
-            <div className="rounded-[2rem] border border-[#11263d]/10 bg-white p-5 shadow-sm">
-              <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#0b5f59]">Admin modules</p>
-              <div className="mt-5 grid gap-2">
+        <div className="mb-5 overflow-x-auto rounded-[1.35rem] border border-[#11263d]/10 bg-white p-2 shadow-sm lg:hidden">
+          <div className="flex min-w-max gap-2">
+            {adminNav.map((item) => <button key={item.tab} onClick={() => setActiveTab(item.tab)} className={`rounded-full px-4 py-3 text-sm font-semibold ${activeTab === item.tab ? "bg-[#11263d] text-white" : "text-[#334155] hover:bg-[#f7f4ee]"}`}>{item.label}</button>)}
+          </div>
+        </div>
+        <div className="grid gap-6 lg:grid-cols-[230px_minmax(0,1fr)] lg:items-start">
+          <aside className="hidden space-y-4 lg:sticky lg:top-28 lg:block">
+            <div className="rounded-[1.5rem] border border-[#11263d]/10 bg-white p-4 shadow-sm">
+              <p className="text-xs font-semibold uppercase tracking-[.18em] text-[#0b5f59]">Admin modules</p>
+              <div className="mt-4 grid gap-2">
                 {adminNav.map((item) => <button key={item.tab} onClick={() => setActiveTab(item.tab)} className={`rounded-2xl px-4 py-3 text-left text-sm font-semibold ${activeTab === item.tab ? "bg-[#e8f0ef] text-[#0b5f59]" : "text-[#334155] hover:bg-[#f7f4ee]"}`}><span className="block">{item.label}</span><span className="mt-1 block text-xs font-medium text-[#6b7280]">{item.detail}</span></button>)}
               </div>
             </div>
-            <div className="rounded-[2rem] border border-[#11263d]/10 bg-white p-5 shadow-sm">
-              <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#7a4f17]">AI merch notes</p>
-              <div className="mt-4 space-y-3">
-                {adminInsights.map((insight) => <p key={insight} className="rounded-2xl bg-[#fff8e8] p-4 text-sm leading-6 text-[#6f4a1f]">{insight}</p>)}
+            <div className="rounded-[1.5rem] border border-[#11263d]/10 bg-white p-4 shadow-sm">
+              <p className="text-xs font-semibold uppercase tracking-[.18em] text-[#7a4f17]">Merch notes</p>
+              <div className="mt-4 space-y-2">
+                {adminInsights.slice(0, 3).map((insight) => <p key={insight} className="rounded-2xl bg-[#fff8e8] p-3 text-xs leading-5 text-[#6f4a1f]">{insight}</p>)}
               </div>
             </div>
           </aside>
 
-          <div className="space-y-6">
+          <div className="min-w-0 space-y-6">
             {activeTab === "Overview" && (
               <>
                 <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
