@@ -5,11 +5,11 @@ export default function PrivacyPage() {
     <PolicyPage
       eyebrow="Privacy"
       title="Privacy notice"
-      intro="LumaLens is a demo storefront, but the footer links behave like a production site and explain how a real eyewear store should handle customer data."
+      intro="LumaLens keeps the shopping experience focused on the information needed to configure frames, review an order, and request follow-up support."
       sections={[
-        { title: "What this demo stores", body: "Cart selections are saved locally in your browser so product options can carry into cart and checkout. The demo does not send payment or prescription data to a backend." },
-        { title: "Production expectations", body: "A production build should use encrypted checkout providers, minimize prescription data, document analytics usage, and provide a clear path to request or delete customer records." },
-        { title: "Analytics", body: "The storefront includes event hooks for storefront analytics and purchase-flow validation. Real deployments should disclose analytics providers and consent requirements." },
+        { title: "Cart preferences", body: "Frame selections can be remembered in your browser so color, fit, lens package, and finish choices remain available while you shop." },
+        { title: "Prescription privacy", body: "Prescription details are requested only when they are needed to fulfill a lens order, and shoppers can choose to provide them after checkout." },
+        { title: "Analytics", body: "Storefront analytics should be used to understand product interest and checkout health, with clear disclosure of providers and consent requirements." },
       ]}
     />
   );

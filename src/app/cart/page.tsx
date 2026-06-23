@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { LazyFrameArt } from "@/components/lazy-frame-art";
+import { ProductPreview } from "@/components/product-preview";
 import { SiteHeader } from "@/components/site-header";
 import { CartLine, cartDetails, lineKey, readCart, updateCartLine } from "@/lib/cart";
 import { formatMoney } from "@/lib/products";
@@ -28,77 +28,76 @@ export default function CartPage() {
   return (
     <main className="min-h-screen px-5 pb-16 pt-28">
       <SiteHeader />
-      <section className="mx-auto max-w-[72rem]">
+      <section className="mx-auto max-w-7xl">
         <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-          <div><p className="text-sm font-semibold uppercase tracking-[.2em] text-[#0b5f59]">Cart</p><h1 className="mt-3 text-5xl font-semibold tracking-[-.05em]">Review your eyewear order.</h1></div>
-          <Link href="/shop" className="interactive-lift rounded-full border border-[#11263d]/25 bg-white px-6 py-4 text-center font-semibold text-[#11263d] hover:border-[#11263d]">Continue shopping</Link>
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#0b5f59]">Cart</p>
+            <h1 className="mt-3 text-5xl font-semibold tracking-tight text-[#11263d]">Review your eyewear order.</h1>
+          </div>
+          <Link href="/shop" className="rounded-full border border-[#11263d]/25 bg-white px-6 py-4 text-center font-semibold text-[#11263d] transition hover:border-[#11263d]">Continue shopping</Link>
         </div>
-        <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,42rem)_minmax(19rem,22rem)] xl:justify-center">
-          <div className="grid w-full max-w-2xl items-start gap-4">
+
+        <div className="grid items-start gap-8 lg:grid-cols-[1fr_24rem]">
+          <div className="grid gap-4">
             {details.lines.length === 0 ? (
-              <div className="rounded-[2rem] bg-white p-10 text-center stripe-shadow"><h2 className="text-2xl font-semibold">Your cart is empty.</h2><p className="mt-3 text-[#334155]">Add a configured pair from a product page or quick-add from the storefront.</p><Link href="/shop" className="mt-6 inline-block interactive-lift rounded-full bg-[#11263d] px-7 py-4 font-semibold text-white">Shop frames</Link></div>
+              <div className="rounded-2xl bg-white p-10 text-center shadow-sm">
+                <h2 className="text-2xl font-semibold text-[#11263d]">Your cart is empty.</h2>
+                <p className="mt-3 text-[#475569]">Add a configured pair from any product page.</p>
+                <Link href="/shop" className="mt-6 inline-block rounded-full bg-[#11263d] px-7 py-4 font-semibold text-white">Shop frames</Link>
+              </div>
             ) : details.lines.map((line) => {
-              const product = line.product!;
+              const summary = line.summary!;
+              const product = summary.product;
               const key = lineKey(line);
               return (
-                <article key={key} className="flex h-fit flex-col gap-4 rounded-[1.5rem] bg-white/85 p-3 stripe-shadow md:flex-row md:items-stretch">
-                  <LazyFrameArt gradient={product.gradient} compact />
-                  <div className="min-w-0 flex-1 px-1 py-1">
-                    <Link href={`/products/${product.slug}`} className="text-xl font-semibold tracking-[-.03em] text-[#11263d]">{product.name}</Link>
-                    <p className="mt-1 line-clamp-2 text-sm leading-6 text-[#334155]">{product.description}</p>
-                    <div className="mt-3 grid gap-x-4 gap-y-1 text-xs text-[#334155] sm:grid-cols-2">
-                      <span><b className="text-[#11263d]">Lens:</b> {line.lens}</span>
-                      <span><b className="text-[#11263d]">Fit:</b> {line.frameSize}</span>
-                      <span><b className="text-[#11263d]">Color:</b> {line.color}</span>
-                      <span><b className="text-[#11263d]">Rx:</b> {line.prescription}</span>
+                <article key={key} className="grid gap-4 rounded-2xl border border-[#11263d]/10 bg-white p-4 shadow-sm md:grid-cols-[10rem_1fr_auto] md:items-stretch">
+                  <ProductPreview product={product} colorId={line.colorId} compact />
+                  <div className="min-w-0 py-1">
+                    <Link href={`/products/${product.slug}`} className="text-xl font-semibold tracking-tight text-[#11263d] transition hover:text-[#0b5f59]">{product.name}</Link>
+                    <p className="mt-1 text-sm leading-6 text-[#475569]">{product.description}</p>
+                    <div className="mt-4 grid gap-x-5 gap-y-2 text-sm text-[#475569] sm:grid-cols-2">
+                      <span><b className="text-[#11263d]">Color:</b> {summary.color.name}</span>
+                      <span><b className="text-[#11263d]">Fit:</b> {summary.size.name} ({summary.size.measurements})</span>
+                      <span><b className="text-[#11263d]">Lens:</b> {summary.lens.name}</span>
+                      <span><b className="text-[#11263d]">Rx:</b> {summary.prescription.name}</span>
                     </div>
+                    {summary.addOns.length > 0 && <p className="mt-3 text-sm text-[#475569]"><b className="text-[#11263d]">Finish:</b> {summary.addOns.map((addOn) => addOn?.name).join(", ")}</p>}
+                    <Link href={`/products/${product.slug}`} className="mt-4 inline-flex text-sm font-semibold text-[#0b5f59]">Edit options</Link>
                   </div>
-                  <div className="flex items-center justify-between gap-3 md:w-24 md:shrink-0 md:flex-col md:items-end md:self-stretch md:text-right">
+                  <div className="flex items-center justify-between gap-4 md:w-28 md:flex-col md:items-end md:text-right">
                     <label className="sr-only" htmlFor={`qty-${key}`}>Quantity for {product.name}</label>
-                    <div className="relative">
-                      <select
-                        id={`qty-${key}`}
-                        value={line.qty}
-                        onChange={(e) => setQty(key, Number(e.target.value))}
-                        className="h-11 w-20 cursor-pointer appearance-none rounded-full border border-[#11263d]/15 bg-white px-4 pr-8 text-center font-semibold text-[#11263d] shadow-sm outline-none transition hover:border-[#11263d]/35 focus:border-[#0b5f59] focus:ring-4 focus:ring-[#0b5f59]/10"
-                        aria-label={`Quantity for ${product.name}`}
-                      >
-                        {[0,1,2,3,4,5].map((n) => <option key={n} value={n}>{n}</option>)}
-                      </select>
-                      <span aria-hidden="true" className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#11263d]">⌄</span>
-                    </div>
-                    <p className="text-2xl font-bold tracking-[-.03em] text-[#11263d]">{formatMoney(((product.price) + (line.lens === "Blue-light" ? 30 : line.lens === "Single vision" ? 80 : line.lens === "Progressive" ? 180 : 0)) * line.qty)}</p>
-                    <button
-                      onClick={() => setQty(key, 0)}
-                      style={{ fontSize: "0.8125rem", lineHeight: 1 }}
-                      className="cursor-pointer rounded-full px-1.5 py-1 font-semibold text-red-600 transition hover:bg-red-50 hover:text-red-700"
-                    >Remove</button>
+                    <select
+                      id={`qty-${key}`}
+                      value={line.qty}
+                      onChange={(e) => setQty(key, Number(e.target.value))}
+                      className="h-11 w-20 rounded-full border border-[#11263d]/15 bg-white px-4 text-center font-semibold text-[#11263d]"
+                      aria-label={`Quantity for ${product.name}`}
+                    >
+                      {[0, 1, 2, 3, 4, 5].map((n) => <option key={n} value={n}>{n}</option>)}
+                    </select>
+                    <p className="text-2xl font-bold tracking-tight text-[#11263d]">{formatMoney(summary.unitPrice * line.qty)}</p>
+                    <button onClick={() => setQty(key, 0)} className="rounded-full px-2 py-1 text-sm font-semibold text-red-600 transition hover:bg-red-50">Remove</button>
                   </div>
                 </article>
               );
             })}
           </div>
-          <aside className="h-fit w-full max-w-2xl rounded-[2rem] bg-[#11263d] p-6 text-white stripe-shadow xl:max-w-none">
+
+          <aside className="h-fit rounded-2xl bg-[#11263d] p-6 text-white shadow-sm">
             <h2 className="text-2xl font-semibold">Order summary</h2>
-            <div className="mt-6 space-y-3 text-sm text-[#e8f0ef]"><div className="flex justify-between"><span>Subtotal</span><b className="text-white">{formatMoney(details.subtotal)}</b></div><div className="flex justify-between"><span>Shipping</span><b className="text-white">{details.shipping === 0 ? "Free" : formatMoney(details.shipping)}</b></div><div className="flex justify-between"><span>Estimated tax</span><b className="text-white">{formatMoney(details.tax)}</b></div><div className="flex justify-between border-t border-white/15 pt-4 text-xl text-white"><span>Total</span><b>{formatMoney(details.total)}</b></div></div>
-            <div className="mt-6 rounded-3xl bg-white/10 p-4 text-sm text-[#e8f0ef]"><b className="text-white">Options included:</b><p className="mt-2">Lens selection, frame fit, color, prescription handling, and quantity edits are preserved into checkout.</p></div>
-            <Link href="/checkout" className={`interactive-lift mt-6 block rounded-full px-7 py-4 text-center font-semibold ${details.count ? "bg-[#0b5f59] text-white" : "pointer-events-none bg-[#d7e3e1] text-[#334155]"}`}>Proceed to payment</Link>
+            <div className="mt-6 space-y-3 text-sm text-[#e8f0ef]">
+              <div className="flex justify-between"><span>Subtotal</span><b className="text-white">{formatMoney(details.subtotal)}</b></div>
+              <div className="flex justify-between"><span>Shipping</span><b className="text-white">{details.shipping === 0 ? "Free" : formatMoney(details.shipping)}</b></div>
+              <div className="flex justify-between"><span>Estimated tax</span><b className="text-white">{formatMoney(details.tax)}</b></div>
+              <div className="flex justify-between border-t border-white/15 pt-4 text-xl text-white"><span>Total</span><b>{formatMoney(details.total)}</b></div>
+            </div>
+            <div className="mt-6 rounded-xl bg-white/10 p-4 text-sm text-[#e8f0ef]">
+              <b className="text-white">Included with every order:</b>
+              <p className="mt-2">Fit support, clear prescription follow-up, case, cloth, and insured delivery.</p>
+            </div>
+            <Link href="/checkout" className={`mt-6 block rounded-full px-7 py-4 text-center font-semibold transition ${details.count ? "bg-[#0b5f59] text-white hover:bg-[#0a4f4a]" : "pointer-events-none bg-[#d7e3e1] text-[#334155]"}`}>Proceed to checkout</Link>
           </aside>
         </div>
-        <section className="mt-16 grid gap-7 md:grid-cols-3 lg:mt-20">
-          <div className="min-h-44 rounded-[2.25rem] bg-white/80 p-8 stripe-shadow">
-            <h2 className="text-[1.35rem] font-semibold leading-tight tracking-[-.035em] text-[#11263d]">Free adjustments</h2>
-            <p className="mt-4 text-[0.95rem] leading-7 text-[#334155]">Every order includes a 30-day fit check. Bring the frame to a partner optician or request an adjustment guide.</p>
-          </div>
-          <div className="min-h-44 rounded-[2.25rem] bg-white/80 p-8 stripe-shadow">
-            <h2 className="text-[1.35rem] font-semibold leading-tight tracking-[-.035em] text-[#11263d]">Prescription handling</h2>
-            <p className="mt-4 text-[0.95rem] leading-7 text-[#334155]">Your cart keeps Rx choices attached to each pair so checkout and fulfillment can stay clear.</p>
-          </div>
-          <div className="min-h-44 rounded-[2.25rem] bg-[#11263d] p-8 text-white stripe-shadow">
-            <h2 className="text-[1.35rem] font-semibold leading-tight tracking-[-.035em]">Protected checkout</h2>
-            <p className="mt-4 text-[0.95rem] leading-7 text-[#e8f0ef]">High-contrast review cards make totals, shipping, tax, and payment actions readable before purchase.</p>
-          </div>
-        </section>
       </section>
     </main>
   );

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FrameArt } from "@/components/frame-art";
-import { LazyFrameArt } from "@/components/lazy-frame-art";
+import { ProductCard } from "@/components/product-card";
 import { ProductOptions } from "@/components/product-options";
+import { ProductPreview } from "@/components/product-preview";
 import { SiteHeader } from "@/components/site-header";
-import { formatMoney, getProduct, products } from "@/lib/products";
+import { compatibleLensPackages, formatMoney, getProduct, products } from "@/lib/products";
 import { absoluteUrl, siteName } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   const title = `${product.name} glasses`;
-  const description = `${product.description} Configure ${product.color.toLowerCase()} frames with ${product.lens.toLowerCase()} and ${product.fit.toLowerCase()} fit guidance.`;
+  const description = `${product.description} Configure ${product.color.toLowerCase()} frames with fit, lens, and finish options.`;
   const url = absoluteUrl(`/products/${product.slug}`);
 
   return {
@@ -48,58 +48,82 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const product = getProduct(slug);
   if (!product) return <main className="grid min-h-screen place-items-center p-10">Product not found.</main>;
   const related = products.filter((item) => item.slug !== product.slug).slice(0, 3);
+  const lenses = compatibleLensPackages(product);
 
   return (
     <main className="min-h-screen px-5 pb-16 pt-28">
       <SiteHeader />
       <div className="mx-auto max-w-7xl">
-        <div className="mb-8 flex items-center justify-between rounded-full bg-white/70 px-5 py-4 backdrop-blur-xl">
-          <Link href="/shop" className="font-semibold text-[#11263d]">← Continue shopping</Link>
-          <Link href="/cart" className="interactive-lift rounded-full bg-[#11263d] px-5 py-3 text-sm font-semibold text-white">View cart</Link>
+        <div className="mb-8 flex items-center justify-between gap-4">
+          <Link href="/shop" className="font-semibold text-[#11263d] transition hover:text-[#0b5f59]">Back to shop</Link>
+          <Link href="/cart" className="rounded-full bg-[#11263d] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#0b5f59]">View cart</Link>
         </div>
-        <section className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
-          <div className="grid min-w-0 gap-5">
-            <FrameArt gradient={product.gradient} large />
-            <div className="grid gap-4 sm:grid-cols-3">
-              {product.features.map((feature) => <div key={feature} className="rounded-3xl bg-white/70 p-4 text-sm font-semibold text-[#11263d]">✓ {feature}</div>)}
+
+        <section className="grid gap-10 lg:grid-cols-[minmax(0,.96fr)_minmax(0,1.04fr)] lg:items-start">
+          <div className="grid gap-5">
+            <ProductPreview product={product} large />
+            <div className="grid gap-3 sm:grid-cols-3">
+              {product.features.map((feature) => (
+                <div key={feature} className="rounded-xl border border-[#11263d]/10 bg-white p-4 text-sm font-semibold text-[#11263d] shadow-sm">{feature}</div>
+              ))}
             </div>
           </div>
-          <div className="glass-card min-w-0 overflow-hidden rounded-[2.5rem] p-6 md:p-10">
-            <p className="text-sm font-semibold uppercase tracking-[.2em] text-[#0b5f59]">{product.collection}</p>
-            <h1 className="mt-3 break-words text-4xl font-semibold tracking-[-.05em] text-[#0c1b2a] md:text-5xl">{product.name}</h1>
-            <p className="mt-4 text-lg leading-8 text-[#334155]">{product.description}</p>
-            <div className="mt-6 flex flex-wrap gap-2">{product.tags.map((tag) => <span key={tag} className="rounded-full bg-[#e8f0ef] px-3 py-1 text-sm font-semibold text-[#0b5f59]">{tag}</span>)}</div>
-            <div className="mt-8 flex items-end gap-3"><span className="text-4xl font-semibold">{formatMoney(product.price)}</span>{product.compareAt && <span className="pb-1 text-lg text-[#334155] line-through">{formatMoney(product.compareAt)}</span>}</div>
-            <p className="mt-2 text-sm text-[#334155]">★ {product.rating} from {product.reviews} verified reviews</p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-3xl bg-white p-5"><p className="text-sm text-[#334155]">Default color</p><b>{product.color}</b></div>
-              <div className="rounded-3xl bg-white p-5"><p className="text-sm text-[#334155]">Recommended fit</p><b>{product.fit}</b></div>
-              <div className="rounded-3xl bg-white p-5 sm:col-span-2"><p className="text-sm text-[#334155]">Lens compatibility</p><b>{product.lens}</b></div>
+
+          <div className="min-w-0 rounded-3xl border border-[#11263d]/10 bg-white/90 p-6 shadow-sm md:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#0b5f59]">{product.collection}</p>
+            <h1 className="mt-3 text-4xl font-semibold tracking-tight text-[#0c1b2a] md:text-5xl">{product.name}</h1>
+            <p className="mt-4 text-lg leading-8 text-[#475569]">{product.description}</p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {product.tags.map((tag) => <span key={tag} className="rounded-full bg-[#edf6f4] px-3 py-1 text-sm font-semibold text-[#0b5f59]">{tag}</span>)}
             </div>
+            <div className="mt-8 flex flex-wrap items-end gap-3">
+              <span className="text-4xl font-semibold text-[#11263d]">{formatMoney(product.price)}</span>
+              {product.compareAt && <span className="pb-1 text-lg text-[#64748b] line-through">{formatMoney(product.compareAt)}</span>}
+              <span className="pb-1 text-sm font-semibold text-[#475569]">{product.rating} rating from {product.reviews} reviews</span>
+            </div>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-xl bg-[#f7f4ee] p-5">
+                <p className="text-sm text-[#64748b]">Frame colors</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {product.colors.map((color) => <span key={color.id} className="size-7 rounded-full border border-[#11263d]/15" style={{ backgroundColor: color.swatch }} title={color.name} />)}
+                </div>
+              </div>
+              <div className="rounded-xl bg-[#f7f4ee] p-5">
+                <p className="text-sm text-[#64748b]">Fits available</p>
+                <p className="mt-2 font-semibold text-[#11263d]">{product.sizes.map((size) => size.name).join(", ")}</p>
+              </div>
+              <div className="rounded-xl bg-[#f7f4ee] p-5 sm:col-span-2">
+                <p className="text-sm text-[#64748b]">Lens packages</p>
+                <p className="mt-2 font-semibold text-[#11263d]">{lenses.map((lens) => lens.name).join(", ")}</p>
+              </div>
+            </div>
+
             <ProductOptions product={product} />
           </div>
         </section>
-        <section className="lazy-render mt-16 grid gap-6 lg:grid-cols-3">
-          <div className="rounded-[2rem] bg-white/80 p-6 stripe-shadow">
-            <p className="text-sm font-semibold uppercase tracking-[.2em] text-[#0b5f59]">Fit notes</p>
-            <h2 className="mt-3 text-2xl font-semibold tracking-[-.03em] text-[#11263d]">Designed for all-day balance.</h2>
-            <p className="mt-3 text-[#334155]">Temple tension, bridge comfort, and lens height are tuned for everyday wear. Choose a narrower, medium, wide, or low-bridge fit before adding to cart.</p>
+
+        <section className="mt-16 grid gap-6 lg:grid-cols-3">
+          <div className="rounded-2xl bg-white p-6 shadow-sm">
+            <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#0b5f59]">Fit notes</p>
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight text-[#11263d]">Measure once, choose confidently.</h2>
+            <p className="mt-3 leading-7 text-[#475569]">Each size card shows lens, bridge, and temple measurements so shoppers can compare against a pair they already own.</p>
           </div>
-          <div className="rounded-[2rem] bg-white/80 p-6 stripe-shadow">
-            <p className="text-sm font-semibold uppercase tracking-[.2em] text-[#7a4f17]">Box contents</p>
-            <h2 className="mt-3 text-2xl font-semibold tracking-[-.03em] text-[#11263d]">Everything included.</h2>
-            <ul className="mt-3 space-y-2 text-[#334155]"><li>• Protective hard case</li><li>• Microfiber cleaning cloth</li><li>• 30-day adjustment window</li></ul>
+          <div className="rounded-2xl bg-white p-6 shadow-sm">
+            <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#7a4f17]">Box contents</p>
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight text-[#11263d]">Ready for daily wear.</h2>
+            <ul className="mt-3 space-y-2 text-[#475569]"><li>Protective hard case</li><li>Microfiber cleaning cloth</li><li>30-day adjustment window</li></ul>
           </div>
-          <div className="rounded-[2rem] bg-[#11263d] p-6 text-white stripe-shadow">
-            <p className="text-sm font-semibold uppercase tracking-[.2em] text-[#d7e3e1]">Need help?</p>
-            <h2 className="mt-3 text-2xl font-semibold tracking-[-.03em]">Prescription-ready support.</h2>
-            <p className="mt-3 text-[#e8f0ef]">Upload later, enter values after purchase, or use demo lenses while you validate the ecommerce flow.</p>
+          <div className="rounded-2xl bg-[#11263d] p-6 text-white shadow-sm">
+            <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#d7e3e1]">Lens support</p>
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight">Prescription help after checkout.</h2>
+            <p className="mt-3 text-[#e8f0ef]">Select how you want to provide your prescription and finish the frame order without entering private Rx values here.</p>
           </div>
         </section>
 
-        <section className="lazy-render mt-16">
-          <h2 className="text-3xl font-semibold tracking-[-.04em]">You may also like</h2>
-          <div className="mt-6 grid gap-5 md:grid-cols-3">{related.map((item) => <Link href={`/products/${item.slug}`} key={item.slug} className="interactive-lift rounded-[2rem] bg-white/70 p-4"><LazyFrameArt gradient={item.gradient} /><b className="mt-4 block text-xl">{item.name}</b><span className="text-[#334155]">{formatMoney(item.price)}</span></Link>)}</div>
+        <section className="mt-16">
+          <h2 className="text-3xl font-semibold tracking-tight text-[#11263d]">You may also like</h2>
+          <div className="mt-6 grid gap-6 md:grid-cols-3">{related.map((item) => <ProductCard product={item} key={item.slug} />)}</div>
         </section>
       </div>
     </main>

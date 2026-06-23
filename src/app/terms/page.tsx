@@ -5,11 +5,11 @@ export default function TermsPage() {
     <PolicyPage
       eyebrow="Terms"
       title="Store terms"
-      intro="These terms frame the demo as a realistic ecommerce experience while making clear where production integrations would be required."
+      intro="These store terms outline how LumaLens presents frame information, checkout review, delivery choices, and fit support."
       sections={[
-        { title: "Demo checkout", body: "Checkout screens and payment fields are mock UI for product validation. No order is fulfilled and no card charge is created from this static storefront." },
-        { title: "Product information", body: "Frames, pricing, reviews, and lens options are sample merchandising data. A production catalog should connect to inventory, taxes, shipping rules, and fulfillment systems." },
-        { title: "Returns and adjustments", body: "The displayed 30-day fit guarantee is a storefront promise pattern. Production terms should specify return windows, adjustment partners, exclusions, and customer support channels." },
+        { title: "Checkout review", body: "Shoppers should review frame color, fit, lens package, finish, delivery, taxes, and totals before placing an order." },
+        { title: "Product information", body: "Frame descriptions, pricing, reviews, and lens options should be kept current so shoppers can compare choices confidently." },
+        { title: "Returns and adjustments", body: "The 30-day fit support window covers comfort guidance and adjustment help. Final return terms should define timing, exclusions, and support channels." },
       ]}
     />
   );

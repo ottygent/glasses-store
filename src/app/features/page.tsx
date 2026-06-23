@@ -2,9 +2,9 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 
 const notes = [
-  ["Static-safe architecture", "Catalog, cart, checkout, and product pages work as a GitHub Pages static export with client-side cart state."],
-  ["Client-side commerce demo", "Cart and payment controls use localStorage and mock form state so no backend or credentials are required."],
-  ["Accessible navigation", "The header, mobile menu, footer, cart, and payment routes now point to dedicated pages rather than section anchors."],
+  ["Fit first", "Start with face width, bridge comfort, and temple length before choosing a color."],
+  ["Lens package", "Pick clear everyday, blue-light comfort, prescription, or polarized sun lenses based on daily use."],
+  ["Finish details", "Add anti-reflective, scratch-resistant, or thin-and-light finishes when they improve everyday wear."],
 ];
 
 export default function FeaturesPage() {
@@ -12,16 +12,16 @@ export default function FeaturesPage() {
     <main className="min-h-screen px-5 pb-16 pt-28">
       <SiteHeader />
       <section className="mx-auto max-w-7xl">
-        <div className="rounded-[2.5rem] bg-[#11263d] p-8 text-white stripe-shadow">
-          <p className="text-sm font-semibold uppercase tracking-[.2em] text-[#d7e3e1]">Storefront features</p>
-          <h1 className="mt-3 max-w-3xl text-5xl font-semibold leading-tight tracking-[-.05em]">Developer notes for the LumaLens demo.</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-[#e8f0ef]">A dedicated page for how the storefront is structured, why the flow is static-safe, and what would connect to production services later.</p>
+        <div className="rounded-3xl bg-[#11263d] p-8 text-white shadow-sm">
+          <p className="text-sm font-semibold uppercase tracking-[.18em] text-[#d7e3e1]">Lens and fit guide</p>
+          <h1 className="mt-3 max-w-3xl text-5xl font-semibold leading-tight tracking-tight">Choose frames around comfort, clarity, and daily use.</h1>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-[#e8f0ef]">A quick guide to the choices shoppers make before configuring a LumaLens pair.</p>
         </div>
         <div className="mt-8 grid gap-5 lg:grid-cols-3">
           {notes.map(([title, detail]) => (
-            <article key={title} className="rounded-[2rem] bg-white/80 p-7 stripe-shadow">
-              <h2 className="text-2xl font-semibold tracking-[-.03em] text-[#11263d]">{title}</h2>
-              <p className="mt-4 leading-7 text-[#334155]">{detail}</p>
+            <article key={title} className="rounded-2xl bg-white p-7 shadow-sm">
+              <h2 className="text-2xl font-semibold tracking-tight text-[#11263d]">{title}</h2>
+              <p className="mt-4 leading-7 text-[#475569]">{detail}</p>
             </article>
           ))}
         </div>

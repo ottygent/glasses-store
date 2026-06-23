@@ -21,11 +21,10 @@ export function SiteHeader() {
 
   const nav = [
     { href: "/shop", label: "Shop" },
-    { href: "/try-on", label: "Try-on" },
+    { href: "/shop/blue-light", label: "Blue-light" },
+    { href: "/shop/prescription", label: "Prescription" },
+    { href: "/try-on", label: "Fit guide" },
     { href: "/trust", label: "Trust" },
-    { href: "/cart", label: "Cart" },
-    { href: "/checkout", label: "Payment" },
-    { href: "/admin", label: "Admin" },
   ];
 
   return (
@@ -47,7 +46,7 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-8 text-sm font-medium text-[#334155] md:flex">
           {nav.map((item) => <Link key={item.href} href={item.href} className="hover:text-[#11263d]">{item.label}</Link>)}
         </nav>
-        <Link href="/cart" className="shrink-0 rounded-full bg-[#11263d] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 sm:px-5">Cart ({count})</Link>
+        <Link href="/cart" className="shrink-0 rounded-full bg-[#11263d] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 transition hover:bg-[#0b5f59] sm:px-5">Cart ({count})</Link>
       </div>
       {menuOpen && (
         <div className="border-t border-[#11263d]/10 bg-[#fffdf8] px-5 pb-5 md:hidden">
